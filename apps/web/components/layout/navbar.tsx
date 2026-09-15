@@ -12,6 +12,7 @@ import {
   X,
   ChevronDown,
   Layers,
+  LogIn,
 } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 
@@ -20,10 +21,16 @@ export function Navbar() {
   const { currentUser, activeRole, setIsSwitcherOpen } = useDemo();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Role-Aware Navigation per Step 8
+  const isBusinessOwner = activeRole === "business_owner";
+
   const navLinks = [
-    { label: "Find Opportunities", href: "/opportunities" },
-    { label: "My Applications", href: "/applications" },
     { label: "Dashboard", href: "/dashboard" },
+    {
+      label: isBusinessOwner ? "My Opportunities" : "Opportunities",
+      href: "/opportunities",
+    },
+    { label: "Applications", href: "/applications" },
     { label: "Profile", href: "/profile" },
   ];
 
@@ -47,19 +54,32 @@ export function Navbar() {
             <span className="font-semibold text-white tracking-wide">
               DEMO MODE:
             </span>
-            <span className="text-slate-300">
-              Active persona is <strong className="text-white">{currentUser.fullName}</strong> ({roleDisplayLabel})
+            <span className="text-slate-300 hidden sm:inline">
+              Active persona: <strong className="text-white">{currentUser.fullName}</strong> ({roleDisplayLabel})
+            </span>
+            <span className="text-slate-300 sm:hidden">
+              <strong className="text-white">{currentUser.fullName}</strong>
             </span>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setIsSwitcherOpen(true)}
-            className="flex items-center gap-1 font-semibold text-brand-300 hover:text-white transition-colors underline text-xs"
-          >
-            <Layers className="h-3.5 w-3.5" />
-            Switch Persona
-          </button>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/sign-in"
+              className="text-slate-300 hover:text-white transition-colors text-xs hidden sm:flex items-center gap-1"
+            >
+              <LogIn className="h-3 w-3" />
+              Sign In Demo
+            </Link>
+            <span className="text-slate-600 hidden sm:inline">•</span>
+            <button
+              type="button"
+              onClick={() => setIsSwitcherOpen(true)}
+              className="flex items-center gap-1 font-semibold text-brand-300 hover:text-white transition-colors underline text-xs"
+            >
+              <Layers className="h-3.5 w-3.5" />
+              Switch Persona
+            </button>
+          </div>
         </div>
       </div>
 
@@ -107,9 +127,8 @@ export function Navbar() {
             })}
           </nav>
 
-          {/* Role Switcher & Dashboard Trigger */}
+          {/* Actions: Demo Role Switcher & Auth Links */}
           <div className="hidden md:flex items-center gap-3">
-            {/* Prominent Demo Role Switcher */}
             <button
               type="button"
               onClick={() => setIsSwitcherOpen(true)}
@@ -124,9 +143,15 @@ export function Navbar() {
               </span>
             </button>
 
+            <Link href="/sign-up">
+              <Button size="sm" variant="outline" className="text-xs">
+                Onboarding
+              </Button>
+            </Link>
+
             <Link href="/dashboard">
-              <Button size="sm" variant="primary">
-                Open Dashboard
+              <Button size="sm" variant="primary" className="text-xs">
+                Dashboard
               </Button>
             </Link>
           </div>
@@ -170,7 +195,22 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
+
             <div className="pt-3 border-t border-surface-border mt-2 space-y-2">
+              <Link
+                href="/sign-in"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-center text-xs font-medium py-2 text-text-muted hover:text-brand-600"
+              >
+                Sign In Presentation Demo
+              </Link>
+              <Link
+                href="/sign-up"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-center text-xs font-medium py-2 text-brand-700 font-semibold"
+              >
+                Start Role Onboarding
+              </Link>
               <Button
                 variant="outline"
                 size="md"

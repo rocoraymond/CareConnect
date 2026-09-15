@@ -9,10 +9,10 @@
  * Will execute fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/v1/applications`)
  */
 
-import { Application, ApplicationStatus } from "@/types/application";
+import { Application, ApplicationStatus, ApplicationTimelineEvent } from "@/types/application";
 import { MOCK_APPLICATIONS } from "@/lib/mock/applications";
 
-// In-memory store for session additions
+// In-memory store for session additions & updates
 let sessionApplications: Application[] = [...MOCK_APPLICATIONS];
 
 export async function getApplications(): Promise<Application[]> {
@@ -23,6 +23,11 @@ export async function getApplications(): Promise<Application[]> {
 export async function getApplicationsForUser(userId: string): Promise<Application[]> {
   await new Promise((resolve) => setTimeout(resolve, 50));
   return sessionApplications.filter((app) => app.applicantId === userId);
+}
+
+export async function getApplicationsForFacility(facilityId: string): Promise<Application[]> {
+  await new Promise((resolve) => setTimeout(resolve, 50));
+  return sessionApplications.filter((app) => app.facilityId === facilityId);
 }
 
 export async function getApplicationById(id: string): Promise<Application | null> {
@@ -67,4 +72,50 @@ export async function submitApplication(input: SubmitApplicationInput): Promise<
   // Prepend to session list so it's immediately visible
   sessionApplications = [newApp, ...sessionApplications];
   return newApp;
+}
+
+/**
+ * Updates application status in session (used by Business Owner in demo)
+ */
+export async function updateApplicationStatus(
+  applicationId: string,
+  newStatus: ApplicationStatus,
+  reviewerNote?: string
+): Promise<Application | null> {
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  const index = sessionApplications.findIndex((a) => a.id === applicationId);
+  if (index === -1) return null;
+
+  const app = sessionApplications[index];
+
+  const statusLabels: Record<ApplicationStatus, string> = {
+    submitted: "Application Submitted",
+    under_review: "Under Clinical Review",
+    interview_scheduled: "Interview Scheduled",
+    accepted: "Offer Extended & Accepted",
+    declined: "Application Concluded",
+  };
+
+  const newTimelineEvent: ApplicationTimelineEvent = {
+    status: newStatus,
+    label: statusLabels[newStatus],
+    timestamp: "Just now",
+    description:
+      reviewerNote ||
+      (newStatus === "interview_scheduled"
+        ? "Facility director approved for orientation & interview."
+        : newStatus === "accepted"
+        ? "Candidate accepted for facility residential shift."
+        : `Status updated to ${newStatus}.`),
+  };
+
+  const updated: Application = {
+    ...app,
+    status: newStatus,
+    timeline: [...app.timeline, newTimelineEvent],
+  };
+
+  sessionApplications[index] = updated;
+  return updated;
 }
