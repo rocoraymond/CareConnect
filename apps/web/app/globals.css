@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg-canvas: #F8FAFC;
+    --color-text-main: #0F172A;
+  }
+
+  body {
+    @apply bg-surface-canvas text-text-main antialiased min-h-screen flex flex-col font-sans;
+  }
+
+  /* Accessible focus rings */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-brand-600 ring-offset-2 ring-offset-white;
+  }
+}
