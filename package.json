@@ -1,0 +1,24 @@
+{
+  "name": "care-connect-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Care Connect - Healthcare & Community Care Connecting Platform",
+  "scripts": {
+    "dev": "npm run dev --prefix apps/web",
+    "build": "npm run build --prefix apps/web",
+    "start": "npm run start --prefix apps/web",
+    "lint": "npm run lint --prefix apps/web",
+    "type-check": "npm run type-check --prefix apps/web",
+    "test": "echo \"Automated unit/integration test suite is intentionally deferred during the frontend presentation phase. Run 'npm run type-check' and 'npm run lint' for current validation.\" && exit 0"
+  },
+  "keywords": [
+    "care-connect",
+    "healthcare",
+    "caregivers",
+    "volunteers",
+    "nextjs",
+    "prototype"
+  ],
+  "author": "Care Connect Team",
+  "license": "UNLICENSED"
+}
