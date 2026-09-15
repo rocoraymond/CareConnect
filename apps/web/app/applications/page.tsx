@@ -195,7 +195,7 @@ export default function ApplicationsPage() {
                       Submitted Note
                     </span>
                     <p className="text-text-muted italic line-clamp-2">
-                      "{app.coverNote}"
+                      &ldquo;{app.coverNote}&rdquo;
                     </p>
                   </div>
                 </div>

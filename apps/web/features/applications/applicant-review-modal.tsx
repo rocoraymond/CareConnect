@@ -102,15 +102,15 @@ export function ApplicantReviewModal({
           </div>
         </div>
 
-        {/* Verification Status */}
-        <div className="rounded-lg bg-emerald-50/60 border border-emerald-200 p-3 flex items-start gap-2.5">
-          <ShieldCheck className="h-4 w-4 text-emerald-600 mt-0.5 shrink-0" />
+        {/* Credential Status — Demo Record */}
+        <div className="rounded-lg bg-slate-50 border border-slate-200 p-3 flex items-start gap-2.5">
+          <ShieldCheck className="h-4 w-4 text-brand-600 mt-0.5 shrink-0" />
           <div className="text-xs">
-            <span className="font-semibold text-emerald-950">
-              Platform Background & License Screening: Cleared
+            <span className="font-semibold text-text-main">
+              Credential Status — Demo Record
             </span>
-            <p className="text-emerald-800 mt-0.5 leading-relaxed">
-              California CNA License verified active in state registry. Healthcare provider BLS/CPR current through 2027.
+            <p className="text-text-muted mt-0.5 leading-relaxed">
+              CNA License — Demo Record (#CNA-894102) • BLS Certification — Demo Record • Background Screening — Demo Status.
             </p>
           </div>
         </div>
@@ -131,7 +131,7 @@ export function ApplicantReviewModal({
               Candidate Note to Director
             </span>
             <div className="p-3 rounded-md bg-white border border-surface-border text-text-muted leading-relaxed italic">
-              "{application.coverNote}"
+              &ldquo;{application.coverNote}&rdquo;
             </div>
           </div>
         </div>

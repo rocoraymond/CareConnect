@@ -192,8 +192,8 @@ export default function SignInPage() {
 
             <div className="flex items-center justify-between text-xs pt-1">
               <span className="text-text-muted flex items-center gap-1">
-                <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" />
-                Demo verified credentials attached
+                <ShieldCheck className="h-3.5 w-3.5 text-brand-600" />
+                Sample credentials attached (Demo Record)
               </span>
               <Link href="/sign-up" className="text-brand-700 hover:underline font-medium">
                 Need to create an account?

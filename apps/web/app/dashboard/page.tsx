@@ -96,7 +96,7 @@ export default function DashboardPage() {
             {currentUser.isVerified && (
               <Badge variant="success" className="text-[11px] gap-1">
                 <CheckCircle2 className="h-3 w-3" />
-                Verified Community Partner
+                Demo Community Partner
               </Badge>
             )}
           </div>
@@ -161,7 +161,7 @@ export default function DashboardPage() {
             <MetricCard
               title="New Applications"
               value={applications.length.toString()}
-              subtitle="2 CNA licenses verified"
+              subtitle="2 CNA profiles — Demo Records"
               icon={Users}
             />
             <MetricCard
@@ -254,7 +254,7 @@ export default function DashboardPage() {
             <MetricCard
               title="Profile Completion"
               value="100%"
-              subtitle="CNA license & BLS verified"
+              subtitle="CNA & BLS — Demo Records"
               icon={UserCheck}
             />
           </>
@@ -522,8 +522,8 @@ export default function DashboardPage() {
             </h4>
             <p className="leading-relaxed">
               {activeRole === "business_owner"
-                ? "Demonstrating Flow B (Business Owner): Click 'Review Applicant' above to inspect Sarah Mitchell's verified CNA credentials and advance her status to 'Interview Scheduled' or 'Accepted'."
-                : "Demonstrating Flow A (Caregiver): Browse open shifts, submit an application with verified credentials, and track your status progression in the timeline."}
+                ? "Demonstrating Flow B (Business Owner): Click 'Review Applicant' above to inspect Sarah Mitchell's CNA credentials (Demo Record) and advance her status to 'Interview Scheduled' or 'Accepted'."
+                : "Demonstrating Flow A (Caregiver): Browse open shifts, submit an application with sample credentials, and track your status progression in the timeline."}
             </p>
           </div>
         </div>

@@ -112,7 +112,7 @@ export default function ProfilePage() {
                 {currentUser.isVerified && (
                   <Badge variant="success" className="gap-1 text-[11px]">
                     <ShieldCheck className="h-3 w-3" />
-                    Verified Provider
+                    Demo Profile
                   </Badge>
                 )}
               </div>
@@ -201,7 +201,7 @@ export default function ProfilePage() {
             <CardHeader className="pb-3">
               <h3 className="font-bold text-base text-text-main flex items-center gap-2">
                 <Award className="h-4 w-4 text-brand-600" />
-                Verified Licenses & Certifications
+                Licenses & Certifications — Demo Records
               </h3>
             </CardHeader>
             <CardContent className="space-y-2.5">
@@ -214,8 +214,8 @@ export default function ProfilePage() {
                     <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
                     <span>{cert}</span>
                   </div>
-                  <span className="text-emerald-700 font-semibold text-[11px] bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 shrink-0">
-                    Active
+                  <span className="text-slate-600 font-semibold text-[11px] bg-slate-100 px-2 py-0.5 rounded border border-slate-200 shrink-0">
+                    Demo Record
                   </span>
                 </div>
               ))}
