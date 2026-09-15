@@ -10,7 +10,6 @@ import {
   HeartHandshake,
   Menu,
   X,
-  UserCheck,
   ChevronDown,
   Layers,
 } from "lucide-react";
@@ -18,7 +17,7 @@ import { cn } from "@/lib/utils/cn";
 
 export function Navbar() {
   const pathname = usePathname();
-  const { currentUser, setIsSwitcherOpen } = useDemo();
+  const { currentUser, activeRole, setIsSwitcherOpen } = useDemo();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -28,29 +27,35 @@ export function Navbar() {
     { label: "Profile", href: "/profile" },
   ];
 
+  const roleDisplayLabel = {
+    caregiver: "Caregiver",
+    business_owner: "Business Owner",
+    volunteer: "Volunteer",
+    student: "Student Intern",
+    admin: "Administrator",
+  }[activeRole] || "Caregiver";
+
   return (
     <>
       <RoleSwitcherModal />
 
-      {/* Demo Banner */}
-      <div className="bg-slate-900 text-slate-200 text-xs py-1.5 px-4">
+      {/* Demo Mode Top Banner */}
+      <div className="bg-slate-900 text-slate-200 text-xs py-1.5 px-4 border-b border-slate-800">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="inline-block h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-medium text-slate-300">
-              Demo Mode Active:
+            <span className="font-semibold text-white tracking-wide">
+              DEMO MODE:
             </span>
-            <span className="text-white font-semibold">
-              {currentUser.fullName}
-            </span>
-            <span className="hidden sm:inline text-slate-400">
-              ({currentUser.headline.split("•")[0]?.trim()})
+            <span className="text-slate-300">
+              Active persona is <strong className="text-white">{currentUser.fullName}</strong> ({roleDisplayLabel})
             </span>
           </div>
+
           <button
             type="button"
             onClick={() => setIsSwitcherOpen(true)}
-            className="flex items-center gap-1 font-semibold text-brand-300 hover:text-brand-200 underline text-xs"
+            className="flex items-center gap-1 font-semibold text-brand-300 hover:text-white transition-colors underline text-xs"
           >
             <Layers className="h-3.5 w-3.5" />
             Switch Persona
@@ -102,16 +107,21 @@ export function Navbar() {
             })}
           </nav>
 
-          {/* Actions & Role Switcher */}
+          {/* Role Switcher & Dashboard Trigger */}
           <div className="hidden md:flex items-center gap-3">
+            {/* Prominent Demo Role Switcher */}
             <button
               type="button"
               onClick={() => setIsSwitcherOpen(true)}
-              className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-lg border border-brand-200 bg-brand-50 text-brand-800 hover:bg-brand-100 transition-colors shadow-subtle"
+              className="flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-lg border border-brand-200 bg-brand-50 text-brand-800 hover:bg-brand-100 hover:border-brand-300 transition-all shadow-subtle"
             >
-              <UserCheck className="h-3.5 w-3.5 text-brand-600" />
-              <span>Role: <strong className="capitalize">{currentUser.role.replace('_', ' ')}</strong></span>
-              <ChevronDown className="h-3 w-3 text-brand-600" />
+              <span className="text-brand-600 uppercase text-[10px] tracking-wider font-bold">
+                Demo Role
+              </span>
+              <span className="bg-white px-2 py-0.5 rounded border border-brand-200 text-brand-900 font-bold flex items-center gap-1">
+                {roleDisplayLabel}
+                <ChevronDown className="h-3 w-3 text-brand-600" />
+              </span>
             </button>
 
             <Link href="/dashboard">
@@ -121,14 +131,15 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile menu trigger */}
           <div className="flex md:hidden items-center gap-2">
             <button
               type="button"
               onClick={() => setIsSwitcherOpen(true)}
-              className="text-xs font-semibold px-2 py-1 rounded bg-brand-50 text-brand-700 border border-brand-200"
+              className="text-xs font-semibold px-2.5 py-1 rounded-md bg-brand-50 text-brand-700 border border-brand-200 flex items-center gap-1"
             >
-              Demo Switch
+              <span>{roleDisplayLabel}</span>
+              <ChevronDown className="h-3 w-3" />
             </button>
             <button
               type="button"
@@ -163,13 +174,13 @@ export function Navbar() {
               <Button
                 variant="outline"
                 size="md"
-                className="w-full justify-center"
+                className="w-full justify-center text-xs"
                 onClick={() => {
                   setMobileMenuOpen(false);
                   setIsSwitcherOpen(true);
                 }}
               >
-                Switch Persona ({currentUser.role.replace('_', ' ')})
+                Switch Demo Role ({roleDisplayLabel})
               </Button>
             </div>
           </div>

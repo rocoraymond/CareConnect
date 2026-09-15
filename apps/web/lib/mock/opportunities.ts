@@ -1,3 +1,8 @@
+// ==============================================================================
+// DEMO DATA - 100% Fictional Data for Client Presentation Prototype
+// Contains strictly fictional shifts, requirements, and compensation scales.
+// ==============================================================================
+
 import { Opportunity } from "@/types/opportunity";
 
 export const MOCK_OPPORTUNITIES: Opportunity[] = [
@@ -7,20 +12,20 @@ export const MOCK_OPPORTUNITIES: Opportunity[] = [
     type: "caregiving",
     category: "Memory Care",
     facilityId: "facility-01",
-    facilityName: "Oakridge Senior Living & Memory Care",
+    facilityName: "BrightCare Senior Living & Memory Center",
     facilityLocation: "Oakland, CA",
     description: "Provide attentive, dignity-centered personal care and daily living assistance for residents in our secure 24-bed memory care neighborhood.",
     responsibilities: [
       "Assist residents with gentle morning hygiene, grooming, and dressing routines.",
       "Facilitate guided walks, sensory garden activities, and music recall therapy.",
       "Safely perform two-person and mechanical lift transfers in accordance with care plans.",
-      "Document meal intake, fluid hydration, and behavioral notes in the shift log."
+      "Document meal intake, fluid hydration, and behavioral notes in the shift log.",
     ],
     requirements: [
       "Active California CNA certification in good standing.",
       "Minimum 1 year experience in Alzheimer's or memory support care.",
       "Current BLS / CPR for Healthcare Providers certification.",
-      "Demonstrated patience, calm demeanor, and empathetic communication."
+      "Demonstrated patience, calm demeanor, and empathetic communication.",
     ],
     schedule: "Tuesday - Saturday",
     shiftHours: "7:00 AM - 3:30 PM (Day Shift)",
@@ -38,20 +43,20 @@ export const MOCK_OPPORTUNITIES: Opportunity[] = [
     type: "caregiving",
     category: "Elderly Care",
     facilityId: "facility-01",
-    facilityName: "Oakridge Senior Living & Memory Care",
+    facilityName: "BrightCare Senior Living & Memory Center",
     facilityLocation: "Oakland, CA",
     description: "Support assisted living elders with dinner service escort, medication reminders, and evening wind-down routines.",
     responsibilities: [
       "Escort residents to the community dining room and assist with dining choices.",
       "Prompt scheduled evening medications under supervisory nurse guidelines.",
       "Perform evening turn-down assistance and bedtime safety checks.",
-      "Promptly answer resident call pendants and assist with bathroom transfers."
+      "Promptly answer resident call pendants and assist with bathroom transfers.",
     ],
     requirements: [
       "High school diploma or equivalent; CNA preferred but not required.",
       "At least 6 months experience in residential care or home health.",
       "TB test clearance and background check clearance.",
-      "Reliable punctuality and warm bedside manner."
+      "Reliable punctuality and warm bedside manner.",
     ],
     schedule: "Monday - Friday",
     shiftHours: "3:00 PM - 11:30 PM (Swing Shift)",
@@ -69,20 +74,20 @@ export const MOCK_OPPORTUNITIES: Opportunity[] = [
     type: "volunteer",
     category: "Activities & Recreation",
     facilityId: "facility-02",
-    facilityName: "Golden Gate Adult Day & Wellness Hub",
+    facilityName: "Riverside Community Health Center",
     facilityLocation: "San Francisco, CA",
     description: "Spend meaningful weekend hours leading recreational games, reading morning news, and sharing conversation with neighborhood seniors.",
     responsibilities: [
       "Lead small-group card games, puzzles, and bingo sessions.",
       "Accompany participants on supervised patio strolls and garden watering.",
       "Engage individuals in one-on-one life story sharing and memory books.",
-      "Assist program staff with beverage and snack distribution."
+      "Assist program staff with beverage and snack distribution.",
     ],
     requirements: [
       "Enthusiasm for building connections with elderly community members.",
       "Reliable availability for at least two weekend shifts per month.",
       "Clear background check (sponsored by facility).",
-      "No prior medical experience required; orientation provided."
+      "No prior medical experience required; orientation provided.",
     ],
     schedule: "Saturdays & Sundays",
     shiftHours: "10:00 AM - 2:00 PM (4-Hour Shifts)",
@@ -100,20 +105,20 @@ export const MOCK_OPPORTUNITIES: Opportunity[] = [
     type: "internship",
     category: "Rehabilitation Support",
     facilityId: "facility-03",
-    facilityName: "Pinecrest Post-Acute & Rehabilitation",
+    facilityName: "Harborview Care Services & Rehabilitation",
     facilityLocation: "San Mateo, CA",
     description: "Hands-on supervised clinical internship under licensed RN preceptors, focusing on post-surgical rehabilitation and wound monitoring.",
     responsibilities: [
       "Shadow Charge RN during clinical assessments and medication passes.",
       "Practice vital sign evaluations and sterile dressing change assistance.",
       "Assist physical therapists during gait training and range-of-motion routines.",
-      "Document observations in electronic clinical learning journals."
+      "Document observations in electronic clinical learning journals.",
     ],
     requirements: [
       "Enrolled in an accredited BSN or ADN nursing program.",
       "Completed Foundations of Nursing and Pharmacology coursework.",
       "Faculty recommendation letter and university clinical agreement.",
-      "BLS / CPR certification."
+      "BLS / CPR certification.",
     ],
     schedule: "Flexible weekday schedules",
     shiftHours: "8:00 AM - 4:30 PM",
@@ -131,20 +136,20 @@ export const MOCK_OPPORTUNITIES: Opportunity[] = [
     type: "volunteer",
     category: "Community Meals",
     facilityId: "facility-02",
-    facilityName: "Golden Gate Adult Day & Wellness Hub",
+    facilityName: "Riverside Community Health Center",
     facilityLocation: "San Francisco, CA",
     description: "Support our daily hot lunch program serving 60+ low-income senior citizens in the Mission District.",
     responsibilities: [
       "Help set dining tables with placemats, silverware, and water carafes.",
       "Plate and serve hot, wholesome chef-prepared lunches to seated elders.",
       "Share friendly table conversations and ensure specialized dietary needs are met.",
-      "Assist with light kitchen cleanup, tray washing, and dining room sanitizing."
+      "Assist with light kitchen cleanup, tray washing, and dining room sanitizing.",
     ],
     requirements: [
       "Commitment to community service and senior nutrition access.",
       "Ability to stand and carry lunch trays comfortably.",
       "California Food Handler Card (reimbursable by center).",
-      "Warm, hospitable interpersonal communication."
+      "Warm, hospitable interpersonal communication.",
     ],
     schedule: "Monday, Wednesday, or Friday",
     shiftHours: "11:00 AM - 1:30 PM",
@@ -162,20 +167,20 @@ export const MOCK_OPPORTUNITIES: Opportunity[] = [
     type: "caregiving",
     category: "Companion Care",
     facilityId: "facility-04",
-    facilityName: "Serenity Hospice & Palliative Residence",
+    facilityName: "Serenity Palliative Care Residence",
     facilityLocation: "Berkeley, CA",
-    description: "Provide overnight peaceful vigilance, comfort measures, and gentle reassurance for terminally ill residents and their visiting families.",
+    description: "Provide overnight peaceful vigilance, comfort measures, and gentle reassurance for residents and their visiting families.",
     responsibilities: [
       "Conduct quiet hourly comfort checks and repositioning support.",
       "Provide mouth care, ice chips, and gentle hand-holding for restless residents.",
       "Alert the on-duty palliative nurse if resident discomfort or pain signs escalate.",
-      "Prepare warm herbal tea and quiet comfort for overnight visiting relatives."
+      "Prepare warm herbal tea and quiet comfort for overnight visiting relatives.",
     ],
     requirements: [
       "Certified Caregiver or CNA with hospice/palliative experience.",
       "Demonstrated emotional maturity and quiet, comforting presence.",
       "Clear background check and complete immunizations.",
-      "Ability to remain alert throughout 10-hour nocturnal shifts."
+      "Ability to remain alert throughout 10-hour nocturnal shifts.",
     ],
     schedule: "Thursday - Sunday Nights",
     shiftHours: "9:00 PM - 7:00 AM (Overnight Shift)",
@@ -186,5 +191,5 @@ export const MOCK_OPPORTUNITIES: Opportunity[] = [
     spotsAvailable: 2,
     applicantsCount: 2,
     status: "active",
-  }
+  },
 ];

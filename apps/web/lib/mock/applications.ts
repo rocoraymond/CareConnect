@@ -1,3 +1,8 @@
+// ==============================================================================
+// DEMO DATA - 100% Fictional Data for Client Presentation Prototype
+// Contains strictly fictional application records and progress events.
+// ==============================================================================
+
 import { Application } from "@/types/application";
 
 export const MOCK_APPLICATIONS: Application[] = [
@@ -7,16 +12,16 @@ export const MOCK_APPLICATIONS: Application[] = [
     opportunityTitle: "Certified Nursing Assistant (CNA) - Memory Care Shift",
     opportunityType: "caregiving",
     facilityId: "facility-01",
-    facilityName: "Oakridge Senior Living & Memory Care",
+    facilityName: "BrightCare Senior Living & Memory Center",
     facilityLocation: "Oakland, CA",
-    applicantId: "user-caregiver-01",
-    applicantName: "Elena Rostova",
+    applicantId: "demo-caregiver-01",
+    applicantName: "Sarah Mitchell",
     applicantRole: "Certified Nursing Assistant (CNA)",
-    applicantEmail: "elena.rostova@demo-careconnect.org",
+    applicantEmail: "sarah.mitchell@demo-careconnect.org",
     status: "under_review",
     submittedAt: "2026-09-12T09:30:00Z",
     availability: "Available immediately for Day Shift (Tuesday - Saturday)",
-    coverNote: "I have 6 years of dedicated senior and memory care experience with certified Alzheimer's care credentials. I look forward to supporting Oakridge residents with respectful and patient care.",
+    coverNote: "I have 5 years of dedicated senior and memory care experience with certified Alzheimer's care credentials. I look forward to supporting BrightCare residents with respectful and patient care.",
     timeline: [
       {
         status: "submitted",
@@ -38,12 +43,12 @@ export const MOCK_APPLICATIONS: Application[] = [
     opportunityTitle: "Overnight Respite Caregiver - Palliative Residence",
     opportunityType: "caregiving",
     facilityId: "facility-04",
-    facilityName: "Serenity Hospice & Palliative Residence",
+    facilityName: "Serenity Palliative Care Residence",
     facilityLocation: "Berkeley, CA",
-    applicantId: "user-caregiver-01",
-    applicantName: "Elena Rostova",
+    applicantId: "demo-caregiver-01",
+    applicantName: "Sarah Mitchell",
     applicantRole: "Certified Nursing Assistant (CNA)",
-    applicantEmail: "elena.rostova@demo-careconnect.org",
+    applicantEmail: "sarah.mitchell@demo-careconnect.org",
     status: "interview_scheduled",
     submittedAt: "2026-09-11T14:20:00Z",
     availability: "Friday & Saturday nights (9:00 PM - 7:00 AM)",
@@ -75,12 +80,12 @@ export const MOCK_APPLICATIONS: Application[] = [
     opportunityTitle: "Weekend Senior Companion & Recreational Volunteer",
     opportunityType: "volunteer",
     facilityId: "facility-02",
-    facilityName: "Golden Gate Adult Day & Wellness Hub",
+    facilityName: "Riverside Community Health Center",
     facilityLocation: "San Francisco, CA",
-    applicantId: "user-volunteer-03",
-    applicantName: "David Kim",
+    applicantId: "demo-volunteer-03",
+    applicantName: "Daniel Carter",
     applicantRole: "Community Volunteer",
-    applicantEmail: "david.kim@demo-careconnect.org",
+    applicantEmail: "daniel.carter@demo-careconnect.org",
     status: "accepted",
     submittedAt: "2026-09-09T10:00:00Z",
     availability: "Saturday mornings (10:00 AM - 2:00 PM)",

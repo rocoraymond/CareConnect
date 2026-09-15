@@ -4,7 +4,9 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useDemo } from "@/lib/context/demo-context";
 import { getApplications } from "@/lib/api/applications-api";
+import { getFeaturedOpportunities } from "@/lib/api/opportunities-api";
 import { Application } from "@/types/application";
+import { Opportunity } from "@/types/opportunity";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -22,20 +24,27 @@ import {
   Layers,
   Heart,
   GraduationCap,
+  MessageSquare,
+  UserCheck,
 } from "lucide-react";
 
 export default function DashboardPage() {
   const { currentUser, activeRole, setIsSwitcherOpen } = useDemo();
   const [applications, setApplications] = useState<Application[]>([]);
+  const [recommendedOpps, setRecommendedOpps] = useState<Opportunity[]>([]);
 
   useEffect(() => {
     getApplications().then(setApplications);
+    getFeaturedOpportunities().then(setRecommendedOpps);
   }, []);
 
   const pendingApps = applications.filter(
     (a) => a.status === "submitted" || a.status === "under_review"
   );
   const acceptedApps = applications.filter((a) => a.status === "accepted");
+
+  // First name extraction
+  const firstName = currentUser.fullName.split(" ")[0];
 
   return (
     <div className="py-8 sm:py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
@@ -44,7 +53,7 @@ export default function DashboardPage() {
         <div className="space-y-1.5">
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-brand-50 text-brand-700 border border-brand-200 capitalize">
-              {activeRole.replace("_", " ")} Dashboard
+              {activeRole.replace("_", " ")} Workspace
             </span>
             {currentUser.isVerified && (
               <Badge variant="success" className="text-[11px] gap-1">
@@ -55,12 +64,12 @@ export default function DashboardPage() {
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-text-main">
-            Welcome back, {currentUser.fullName.split(" ")[0]}
+            Good morning, {firstName}
           </h1>
 
           <p className="text-sm text-text-muted max-w-xl leading-relaxed">
             {activeRole === "business_owner"
-              ? "Overseeing facility staffing, active shift postings, and credentialed care applications."
+              ? "Overseeing facility staffing, active shift postings, and credentialed care applications at BrightCare."
               : activeRole === "volunteer"
               ? "Discover weekend community companion opportunities and track your volunteer service hours."
               : activeRole === "student"
@@ -77,72 +86,72 @@ export default function DashboardPage() {
             className="text-xs gap-1.5"
           >
             <Layers className="h-3.5 w-3.5 text-brand-600" />
-            Switch Role Demo
+            Switch Demo Role
           </Button>
 
           <Link href="/opportunities">
             <Button size="sm" variant="primary" className="text-xs">
-              Find Shifts
+              Explore Positions
               <ArrowRight className="h-3.5 w-3.5" />
             </Button>
           </Link>
         </div>
       </div>
 
-      {/* Metrics Row */}
+      {/* Role-Specific Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {activeRole === "business_owner" ? (
           <>
             <MetricCard
-              title="Active Shift Postings"
+              title="Active Opportunities"
               value="3"
-              subtitle="2 urgent needs open"
+              subtitle="2 urgent memory care shifts"
               icon={Briefcase}
             />
             <MetricCard
-              title="Applicants Under Review"
+              title="New Applications"
               value={applications.length.toString()}
               subtitle="2 CNA licenses verified"
               icon={Users}
             />
             <MetricCard
-              title="Licensed Capacity"
-              value="84 Beds"
-              subtitle="Memory care & assisted"
-              icon={Building2}
+              title="Upcoming Shifts"
+              value="12"
+              subtitle="94% scheduled coverage"
+              icon={Calendar}
             />
             <MetricCard
-              title="Shift Coverage"
-              value="94%"
-              subtitle="Next 7 days scheduled"
-              icon={CheckCircle2}
+              title="Messages"
+              value="4 Unread"
+              subtitle="Applicant inquiries"
+              icon={MessageSquare}
             />
           </>
         ) : activeRole === "volunteer" ? (
           <>
             <MetricCard
-              title="Volunteer Hours"
-              value="24.5 hrs"
-              subtitle="Logged this semester"
+              title="Volunteer Opportunities"
+              value="6 Open"
+              subtitle="Community programs"
               icon={Heart}
             />
             <MetricCard
-              title="Active Commitments"
-              value="1"
-              subtitle="Golden Gate Adult Day"
+              title="Upcoming Commitments"
+              value="1 Active"
+              subtitle="Riverside Health Center"
               icon={Building2}
             />
             <MetricCard
-              title="Upcoming Sessions"
-              value="2 Shifts"
-              subtitle="Saturday morning games"
-              icon={Calendar}
+              title="Applications"
+              value="1 Accepted"
+              subtitle="Saturday morning recreation"
+              icon={FileCheck}
             />
             <MetricCard
-              title="Community Impact"
-              value="52 Elders"
-              subtitle="Storytelling & companion"
-              icon={Sparkles}
+              title="Hours Completed"
+              value="24.5 hrs"
+              subtitle="Logged this semester"
+              icon={Clock}
             />
           </>
         ) : activeRole === "student" ? (
@@ -156,7 +165,7 @@ export default function DashboardPage() {
             <MetricCard
               title="Supervised Shifts"
               value="6"
-              subtitle="Pinecrest Rehabilitation"
+              subtitle="Harborview Care Services"
               icon={Clock}
             />
             <MetricCard
@@ -175,28 +184,28 @@ export default function DashboardPage() {
         ) : (
           <>
             <MetricCard
-              title="Submitted Applications"
+              title="Upcoming Applications"
               value={applications.length.toString()}
               subtitle={`${pendingApps.length} currently in review`}
               icon={FileCheck}
             />
             <MetricCard
-              title="Confirmed Placements"
-              value={acceptedApps.length.toString()}
-              subtitle="Ready for orientation"
-              icon={CheckCircle2}
-            />
-            <MetricCard
-              title="Next Scheduled Shift"
-              value="Tomorrow"
-              subtitle="7:00 AM - Oakridge Living"
-              icon={Clock}
-            />
-            <MetricCard
-              title="Profile Completeness"
-              value="100%"
-              subtitle="CNA & BLS verified"
+              title="Recommended Opportunities"
+              value={recommendedOpps.length.toString()}
+              subtitle="Matching CNA credentials"
               icon={Sparkles}
+            />
+            <MetricCard
+              title="Messages"
+              value="2 Unread"
+              subtitle="Direct from intake coordinators"
+              icon={MessageSquare}
+            />
+            <MetricCard
+              title="Profile Completion"
+              value="100%"
+              subtitle="CNA license & BLS verified"
+              icon={UserCheck}
             />
           </>
         )}
@@ -204,19 +213,23 @@ export default function DashboardPage() {
 
       {/* Main Split Sections */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Applications / Activity Stream */}
+        {/* Applications / Primary Activity Stream */}
         <div className="lg:col-span-2 space-y-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-3">
               <div>
-                <CardTitle>Recent Application Activity</CardTitle>
+                <CardTitle>
+                  {activeRole === "business_owner"
+                    ? "Candidate Applications to Review"
+                    : "Your Active Applications"}
+                </CardTitle>
                 <p className="text-xs text-text-muted mt-0.5">
-                  Simulated session tracking for active applications
+                  Simulated session tracking using typed mock data
                 </p>
               </div>
               <Link href="/applications">
                 <Button variant="ghost" size="sm" className="text-xs">
-                  View Tracker <ArrowRight className="h-3 w-3" />
+                  View Full Tracker <ArrowRight className="h-3 w-3" />
                 </Button>
               </Link>
             </CardHeader>
@@ -237,31 +250,70 @@ export default function DashboardPage() {
                       <span>{app.facilityName}</span>
                       <span>•</span>
                       <span>{app.facilityLocation}</span>
+                      {activeRole === "business_owner" && (
+                        <>
+                          <span>•</span>
+                          <span className="font-medium text-brand-700">Applicant: {app.applicantName}</span>
+                        </>
+                      )}
                     </div>
                   </div>
 
                   <Link href={`/opportunities/${app.opportunityId}`}>
                     <Button variant="outline" size="sm" className="text-xs shrink-0">
-                      Details
+                      Position Details
                     </Button>
                   </Link>
                 </div>
               ))}
             </CardContent>
           </Card>
+
+          {/* Recommended Positions Section for Caregiver / Volunteer */}
+          {activeRole === "caregiver" && (
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between pb-3">
+                <CardTitle className="text-base">Recommended Positions for {firstName}</CardTitle>
+                <Link href="/opportunities">
+                  <span className="text-xs text-brand-700 hover:underline">View all</span>
+                </Link>
+              </CardHeader>
+              <CardContent className="space-y-3 pt-1">
+                {recommendedOpps.slice(0, 2).map((opp) => (
+                  <div
+                    key={opp.id}
+                    className="p-3 rounded-lg border border-surface-border bg-white flex items-center justify-between gap-3 text-xs"
+                  >
+                    <div>
+                      <div className="font-semibold text-text-main text-sm">{opp.title}</div>
+                      <div className="text-text-muted mt-0.5">{opp.facilityName} • {opp.facilityLocation}</div>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <div className="font-semibold text-brand-700">{opp.compensation}</div>
+                      <Link href={`/opportunities/${opp.id}`}>
+                        <Button size="sm" variant="outline" className="text-[11px] h-7 mt-1">
+                          View
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          )}
         </div>
 
-        {/* Recommended Quick Actions & Facility Card */}
+        {/* Quick Actions Sidebar */}
         <div className="space-y-6">
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle>Quick Demo Actions</CardTitle>
+              <CardTitle>Demonstration Quick Actions</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2.5">
               <Link href="/opportunities" className="block">
                 <Button variant="outline" size="sm" className="w-full justify-start gap-2 text-xs">
                   <Briefcase className="h-4 w-4 text-brand-600" />
-                  Browse Certified CNA Shifts
+                  Browse Caregiver & Volunteer Shifts
                 </Button>
               </Link>
               <Link href="/applications" className="block">
@@ -288,14 +340,14 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
 
-          {/* Demonstration Notice */}
+          {/* Presentation Guidance Box */}
           <div className="rounded-xl border border-slate-200 bg-white p-5 text-xs text-text-muted space-y-2">
             <h4 className="font-bold text-text-main flex items-center gap-1.5">
               <Sparkles className="h-3.5 w-3.5 text-brand-600" />
-              Presentation Guidance
+              Presentation Guide
             </h4>
             <p className="leading-relaxed">
-              Use the top banner to toggle instantly between Caregiver, Business Owner, Volunteer, and Student roles to see how metrics and priorities shift in real time.
+              Click <strong>Demo Role</strong> in the navbar to switch personas anytime. The greeting, metrics, and application summaries will immediately adapt to reflect that persona's perspective.
             </p>
           </div>
         </div>

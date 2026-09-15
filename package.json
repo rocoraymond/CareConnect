@@ -8,8 +8,7 @@
     "build": "npm run build --prefix apps/web",
     "start": "npm run start --prefix apps/web",
     "lint": "npm run lint --prefix apps/web",
-    "type-check": "npm run type-check --prefix apps/web",
-    "test": "echo \"Automated unit/integration test suite is intentionally deferred during the frontend presentation phase. Run 'npm run type-check' and 'npm run lint' for current validation.\" && exit 0"
+    "type-check": "npm run type-check --prefix apps/web"
   },
   "keywords": [
     "care-connect",

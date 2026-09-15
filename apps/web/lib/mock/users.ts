@@ -1,13 +1,19 @@
+// ==============================================================================
+// DEMO DATA - 100% Fictional Data for Client Presentation Prototype
+// Contains strictly fictional characters, facilities, and scenarios.
+// No real patient, facility, or personal data is used.
+// ==============================================================================
+
 import { UserProfile } from "@/types/user";
 
 export const MOCK_USERS: Record<string, UserProfile> = {
   caregiver: {
-    id: "user-caregiver-01",
-    fullName: "Elena Rostova",
-    email: "elena.rostova@demo-careconnect.org",
+    id: "demo-caregiver-01",
+    fullName: "Sarah Mitchell",
+    email: "sarah.mitchell@demo-careconnect.org",
     role: "caregiver",
     avatarUrl: "",
-    headline: "Certified Nursing Assistant (CNA) • 6 Years Senior Care Experience",
+    headline: "Certified Nursing Assistant (CNA) • 5 Years Senior Care Experience",
     location: "Oakland, CA",
     bio: "Compassionate, patient-centered CNA with extensive experience in memory care, mobility support, and post-operative rehabilitation for senior residents.",
     skills: [
@@ -16,37 +22,37 @@ export const MOCK_USERS: Record<string, UserProfile> = {
       "Medication Reminders",
       "Vitals Monitoring",
       "Fall Prevention",
-      "CPR & First Aid"
+      "CPR & First Aid",
     ],
     certifications: [
       "California Certified Nursing Assistant (#CNA-894102)",
       "BLS / CPR Healthcare Provider (AHA)",
-      "Alzheimer's & Dementia Care Specialist (CADCS)"
+      "Alzheimer's & Dementia Care Specialist (CADCS)",
     ],
-    yearsExperience: 6,
+    yearsExperience: 5,
     isVerified: true,
     phone: "(510) 555-0142",
     preferredCommitment: ["full-time", "shift-based"],
   },
 
   business_owner: {
-    id: "user-owner-02",
-    fullName: "Marcus Chen",
-    email: "marcus.chen@oakridge-living.demo",
+    id: "demo-owner-02",
+    fullName: "Michael Vance",
+    email: "michael.vance@brightcare-demo.org",
     role: "business_owner",
     avatarUrl: "",
-    headline: "Executive Director • Oakridge Senior Living & Memory Care",
+    headline: "Executive Director • BrightCare Senior Living & Memory Center",
     location: "Oakland, CA",
-    bio: "Overseeing residential operations, staff scheduling, and resident wellness standards at Oakridge Senior Living, licensed for 84 residential care beds.",
+    bio: "Overseeing residential operations, staff scheduling, and resident wellness standards at BrightCare Senior Living, licensed for 84 residential care beds.",
     skills: [
       "Facility Administration",
       "Care Staff Recruitment",
       "State Regulatory Compliance",
-      "Resident Care Planning"
+      "Resident Care Planning",
     ],
     certifications: [
       "Licensed Nursing Home Administrator (LNHA)",
-      "RCFE Administrator Certificate"
+      "RCFE Administrator Certificate",
     ],
     yearsExperience: 14,
     isVerified: true,
@@ -55,9 +61,9 @@ export const MOCK_USERS: Record<string, UserProfile> = {
   },
 
   volunteer: {
-    id: "user-volunteer-03",
-    fullName: "David Kim",
-    email: "david.kim@demo-careconnect.org",
+    id: "demo-volunteer-03",
+    fullName: "Daniel Carter",
+    email: "daniel.carter@demo-careconnect.org",
     role: "volunteer",
     avatarUrl: "",
     headline: "Community Companion • Weekend Recreational Volunteer",
@@ -67,11 +73,11 @@ export const MOCK_USERS: Record<string, UserProfile> = {
       "Companion Care",
       "Reading & Storytelling",
       "Board Games & Puzzles",
-      "Wheelchair Escort"
+      "Wheelchair Escort",
     ],
     certifications: [
       "Community Volunteer Safety Clearance",
-      "Adult First Aid Certified"
+      "Adult First Aid Certified",
     ],
     yearsExperience: 2,
     isVerified: true,
@@ -80,9 +86,9 @@ export const MOCK_USERS: Record<string, UserProfile> = {
   },
 
   student: {
-    id: "user-student-04",
-    fullName: "Sarah Jenkins",
-    email: "s.jenkins@demo-bayarea-nursing.edu",
+    id: "demo-student-04",
+    fullName: "Emily Johnson",
+    email: "emily.johnson@demo-bayarea-nursing.edu",
     role: "student",
     avatarUrl: "",
     headline: "BSN Nursing Student (3rd Year) • Seeking Clinical Hours",
@@ -92,11 +98,11 @@ export const MOCK_USERS: Record<string, UserProfile> = {
       "Clinical Documentation",
       "Patient Engagement",
       "Vital Signs Recording",
-      "Infection Control Protocols"
+      "Infection Control Protocols",
     ],
     certifications: [
       "Student Nurse Association Member",
-      "BLS for Healthcare Providers"
+      "BLS for Healthcare Providers",
     ],
     yearsExperience: 1,
     isVerified: true,
@@ -105,7 +111,7 @@ export const MOCK_USERS: Record<string, UserProfile> = {
   },
 
   admin: {
-    id: "user-admin-05",
+    id: "demo-admin-05",
     fullName: "Rachel Adams",
     email: "admin@demo-careconnect.org",
     role: "admin",
@@ -117,10 +123,10 @@ export const MOCK_USERS: Record<string, UserProfile> = {
       "Provider Vetting",
       "Compliance Auditing",
       "Trust & Safety",
-      "Platform Moderation"
+      "Platform Moderation",
     ],
     certifications: [
-      "Healthcare Compliance Specialist (CHC)"
+      "Healthcare Compliance Specialist (CHC)",
     ],
     yearsExperience: 10,
     isVerified: true,
