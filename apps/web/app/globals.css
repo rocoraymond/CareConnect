@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scrollbar-gutter: stable;
+  }
+
   :root {
     --color-bg-canvas: #F8FAFC;
     --color-text-main: #0F172A;

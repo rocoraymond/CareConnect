@@ -96,16 +96,16 @@ export function ApplicationModal({
             </div>
           </div>
 
-          <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-end">
-            <Button variant="outline" size="sm" onClick={handleClose}>
-              Close
-            </Button>
+          <div className="pt-2 flex flex-col-reverse sm:flex-row gap-3 justify-end">
             <Link href="/applications">
-              <Button size="sm" variant="primary" onClick={handleClose}>
-                Track My Applications
-                <ArrowRight className="h-4 w-4" />
+              <Button variant="outline" size="sm" onClick={handleClose} className="w-full sm:w-auto text-xs">
+                View in My Applications
               </Button>
             </Link>
+            <Button size="sm" variant="primary" onClick={handleClose} className="w-full sm:w-auto text-xs font-semibold">
+              Continue Browsing Opportunities
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Button>
           </div>
         </div>
       ) : (

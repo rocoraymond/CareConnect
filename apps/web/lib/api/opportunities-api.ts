@@ -9,7 +9,7 @@
  * Will execute fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/v1/opportunities`)
  */
 
-import { Opportunity, OpportunityType, OpportunityCategory, CommitmentType } from "@/types/opportunity";
+import { Opportunity, OpportunityType, OpportunityCategory, CommitmentType, OpportunitySortOption } from "@/types/opportunity";
 import { MOCK_OPPORTUNITIES } from "@/lib/mock/opportunities";
 
 // In-memory store for session
@@ -22,6 +22,7 @@ export interface OpportunityFilters {
   location?: string;
   commitment?: string;
   facilityId?: string;
+  sortBy?: OpportunitySortOption;
 }
 
 export async function getOpportunities(filters?: OpportunityFilters): Promise<Opportunity[]> {
@@ -43,7 +44,9 @@ export async function getOpportunities(filters?: OpportunityFilters): Promise<Op
         opp.title.toLowerCase().includes(q) ||
         opp.description.toLowerCase().includes(q) ||
         opp.facilityName.toLowerCase().includes(q) ||
-        opp.facilityLocation.toLowerCase().includes(q)
+        opp.facilityLocation.toLowerCase().includes(q) ||
+        opp.category.toLowerCase().includes(q) ||
+        opp.requirements.some((req) => req.toLowerCase().includes(q))
     );
   }
 
@@ -55,8 +58,73 @@ export async function getOpportunities(filters?: OpportunityFilters): Promise<Op
     results = results.filter((opp) => opp.category === filters.category);
   }
 
+  if (filters.location && filters.location.trim() && filters.location !== "all") {
+    const loc = filters.location.toLowerCase().trim();
+    results = results.filter((opp) => {
+      const facilityLoc = opp.facilityLocation.toLowerCase();
+      // Match remote
+      if (loc === "remote") {
+        return (
+          facilityLoc.includes("remote") ||
+          opp.title.toLowerCase().includes("remote") ||
+          opp.description.toLowerCase().includes("remote")
+        );
+      }
+      // Match California / CA
+      if (loc === "ca" || loc === "california") {
+        return facilityLoc.includes("ca") || facilityLoc.includes("california");
+      }
+      // Demo Bay Area ZIP code mapping for local facilities
+      const zipToCity: Record<string, string> = {
+        "94609": "oakland",
+        "94611": "oakland",
+        "94612": "oakland",
+        "94102": "san francisco",
+        "94103": "san francisco",
+        "94110": "san francisco",
+        "94401": "san mateo",
+        "94402": "san mateo",
+        "94704": "berkeley",
+        "94705": "berkeley",
+      };
+      if (zipToCity[loc] && facilityLoc.includes(zipToCity[loc])) {
+        return true;
+      }
+      // Match city names, partial locations, or zip codes
+      return (
+        facilityLoc.includes(loc) ||
+        opp.facilityName.toLowerCase().includes(loc)
+      );
+    });
+  }
+
   if (filters.commitment && filters.commitment !== "all") {
     results = results.filter((opp) => opp.commitment === filters.commitment);
+  }
+
+  // Deterministic demo sorting (no AI / ML ranking)
+  if (filters.sortBy) {
+    switch (filters.sortBy) {
+      case "newest":
+        results.sort((a, b) => new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime());
+        break;
+      case "compensation":
+        // Extract highest dollar number if present
+        const extractMaxRate = (comp: string) => {
+          const matches = comp.match(/\$?(\d+(?:\.\d+)?)/g);
+          if (!matches) return 0;
+          return Math.max(...matches.map((m) => parseFloat(m.replace("$", ""))));
+        };
+        results.sort((a, b) => extractMaxRate(b.compensation) - extractMaxRate(a.compensation));
+        break;
+      case "spots":
+        results.sort((a, b) => b.spotsAvailable - a.spotsAvailable);
+        break;
+      case "default":
+      default:
+        // Default deterministic presentation order
+        break;
+    }
   }
 
   return results;

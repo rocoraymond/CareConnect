@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { HeartHandshake, ShieldCheck, Heart } from "lucide-react";
+import { HeartHandshake, ShieldCheck } from "lucide-react";
 
 export function Footer() {
   return (
@@ -67,7 +67,6 @@ export function Footer() {
           <p>© 2026 Care Connect Platform. All rights reserved.</p>
           <div className="flex items-center gap-1 text-slate-500">
             <span>Built with care for community health</span>
-            <Heart className="h-3.5 w-3.5 text-rose-500 fill-rose-500" />
           </div>
         </div>
       </div>

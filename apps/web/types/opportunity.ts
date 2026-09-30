@@ -9,6 +9,8 @@ export type OpportunityCategory =
 
 export type CommitmentType = 'Full-time' | 'Part-time' | 'Per Diem' | 'Flexible Hours';
 
+export type OpportunitySortOption = 'default' | 'newest' | 'compensation' | 'spots';
+
 export interface Opportunity {
   id: string;
   title: string;
